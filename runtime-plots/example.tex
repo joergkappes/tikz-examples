@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{pgfplots}  
+
+\usepackage[active,pdftex,tightpage]{preview}
+\PreviewEnvironment[{[]}]{tikzpicture}
+
+
+
+
+
+\definecolor{color1}{RGB}{   0,   0, 255}
+\definecolor{color2}{RGB}{   0, 128,   0}
+
+\pgfplotsset{ALG1/.append style       = {color=color1, mark options = {solid}, mark=square*}}
+\pgfplotsset{ALG2/.append style       = {color=color2, mark options = {solid}, mark=x}}
+
+\begin{document}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+ylabel = {value},
+xlabel = {runtime},
+xmin = 0,
+xmax = 30,
+ymin =  0,
+ymax =  100,
+xtick       = { 1 , 5, 10 },
+xticklabels = { 1 sec. , 5 sec. , 10 sec. },
+ytick       = {10, 30, 50 },
+yticklabels = {$10$, $30$, $50$ },
+width = 0.9\textwidth,
+scaled ticks = false
+]
+
+\addplot[ALG1] table[x=T, y=V ]{./ALG1.data};
+\addlegendentry{ALG1} 
+\addplot[ALG2] table[x=T, y=V ]{./ALG2.data};
+\addlegendentry{ALG2}
+
+\addplot[ALG1] table[x=T, y=B ]{./ALG1.data};
+\addplot[ALG2] table[x=T, y=B ]{./ALG2.data};
+
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+\end{document}
